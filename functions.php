@@ -18,16 +18,7 @@ function philosophy_bootstraping(){
     add_theme_support("post-thumbnails");
     add_theme_support("title-tag");
     add_editor_style("assets/css/editor-style.css");
-    add_theme_support("post-formats", array(
-        "aside",
-        "gallery",
-        "image",
-        "quote",
-        "status",
-        "video",
-        "audio",
-        "chat"
-    ));
+    add_theme_support( "post-formats", array( "image", "gallery", "quote", "audio", "video", "link" ) );
     $philosophy_custom_theader_detils = array(
         "header_text" => true,
         "default-text-color" => "#333",
@@ -48,6 +39,12 @@ function philosophy_bootstraping(){
 
     // menu
     register_nav_menu("top_menu", __("Top Menu","philosophy"));
+
+
+    add_image_size("philosophy-squuareimage", 400, 400, true);
+
+
+
 
 
 
