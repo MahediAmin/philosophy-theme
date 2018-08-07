@@ -1173,7 +1173,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
    color: #151515;
 }
 
-.pgn .current-menu-item, .pgn .current-menu-item:hover {
+.pgn .current, .pgn .current:hover {
    background-color: #151515;
    color: #FFFFFF;
 }
@@ -2209,6 +2209,7 @@ body.search-is-visible {
 }
 
 .header__nav li ul {
+
    position: absolute;
    top: 45px;
    left: 0;
