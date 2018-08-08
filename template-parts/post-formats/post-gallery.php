@@ -2,18 +2,20 @@
 
     <div class="entry__thumb slider">
         <div class="slider__slides">
+
+            <?php $all_slides = get_post_meta(get_the_ID(),'_philosophy_image_gallery', true);
+
+            foreach ($all_slides as $single_slides):
+
+
+            ?>
+
             <div class="slider__slide">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/thumbs/masonry/gallery/gallery-1-400.jpg"
-                     srcset="<?php echo get_template_directory_uri(); ?>/assets/images/thumbs/masonry/gallery/gallery-1-400.jpg 1x, <?php echo get_template_directory_uri(); ?>/assets/images/thumbs/masonry/gallery/gallery-1-800.jpg 2x" alt="">
+                <img src="<?php echo esc_url($single_slides)?>" alt="">
             </div>
-            <div class="slider__slide">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/thumbs/masonry/gallery/gallery-2-400.jpg"
-                     srcset="<?php echo get_template_directory_uri(); ?>/assets/images/thumbs/masonry/gallery/gallery-2-400.jpg 1x, <?php echo get_template_directory_uri(); ?>/assets/images/thumbs/masonry/gallery/gallery-2-800.jpg 2x" alt="">
-            </div>
-            <div class="slider__slide">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/thumbs/masonry/gallery/gallery-3-400.jpg"
-                     srcset="<?php echo get_template_directory_uri(); ?>/assets/images/thumbs/masonry/gallery/gallery-3-400.jpg 1x, <?php echo get_template_directory_uri(); ?>/assets/images/thumbs/masonry/gallery/gallery-3-800.jpg 2x" alt="">
-            </div>
+
+            <?php endforeach; ?>
+
         </div>
     </div>
 

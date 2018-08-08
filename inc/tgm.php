@@ -68,6 +68,13 @@ function philosophy_register_required_plugins() {
             'required'  => false,
         ),
 
+        // This is an example of how to include a plugin from the WordPress Plugin Repository.
+        array(
+            'name'      => 'CMB2',
+            'slug'      => 'cmb2',
+            'required'  => false,
+        ),
+
     );
 
     /*
