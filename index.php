@@ -48,5 +48,4 @@
 
 </section> <!-- s-content -->
 
-
 <?php get_footer();?>
