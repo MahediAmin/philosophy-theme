@@ -74,6 +74,19 @@ function philosophy_register_required_plugins() {
             'slug'      => 'cmb2',
             'required'  => false,
         ),
+        // This is an example of how to include a plugin from the WordPress Plugin Repository.
+        array(
+            'name'      => 'wp-google-maps',
+            'slug'      => 'wp-google-maps',
+            'required'  => false,
+        ),
+
+        // This is an example of how to include a plugin from the WordPress Plugin Repository.
+        array(
+            'name'      => 'contact-form-7',
+            'slug'      => 'contact-form-7',
+            'required'  => false,
+        ),
 
     );
 
