@@ -14,13 +14,18 @@ $post_data = array();
 while ( $philosophy_fp->have_posts() ) {
     $philosophy_fp->the_post();
     $categories = get_the_category();
+    $category = $categories[mt_rand(0,count($categories)-1)];
     $post_data[] = array(
         "title" => get_the_title(),
         "date"=>get_the_date(),
+        "permalink"=>get_permalink(),
         "thumbnail"=>get_the_post_thumbnail_url(get_the_ID(),"large"),
+        "author_url"=>get_author_posts_url(get_the_author_meta("ID")),
         "author"=>get_the_author_meta("display_name"),
         'author_avatar'=>get_avatar_url(get_the_author_meta("ID")),
-        'cat'=>$categories[mt_rand(0,count($categories)-1)]->name
+
+        'cat'=>$category->name,
+        'catlink'=>get_category_link($category)
     );
 }
 
@@ -46,20 +51,20 @@ while ( $philosophy_fp->have_posts() ) {
                             <span class="entry__category"><a href="#0"><?php echo esc_html($post_data[0]['cat']) ?></a></span>
 
                             <h1>
-                                <a href="#0" title="">
+                                <a href="<?php echo esc_url($post_data[0]['permalink']); ?>" title="">
                                     <?php echo esc_html($post_data[0]['title']); ?>
                                 </a>
                             </h1>
 
                             <div class="entry__info">
-                                <a href="#0" class="entry__profile-pic">
+                                <a href="<?php echo esc_url($post_data[0]['author_url']); ?> class="entry__profile-pic">
                                     <img class="avatar"
                                          src="<?php echo esc_url($post_data[0]['author_avatar']); ?>"
                                          alt="">
                                 </a>
 
                                 <ul class="entry__meta">
-                                    <li><a href="#0"><?php echo esc_html($post_data[0]['author']); ?></a></li>
+                                    <li><a href="<?php echo esc_url($post_data[0]['permalink']); ?>"><?php echo esc_html($post_data[0]['author']); ?></a></li>
                                     <li><?php echo esc_html($post_data[0]['date']); ?></li>
                                 </ul>
                             </div>
@@ -80,13 +85,13 @@ while ( $philosophy_fp->have_posts() ) {
                                 <span class="entry__category"><a href="#0"><?php echo esc_html($post_data[$i]['cat']) ?></a></span>
 
                                 <h1>
-                                    <a href="#0" title="">
+                                    <a href="<?php echo esc_url($post_data[$i]['permalink']); ?>" title="">
                                         <?php echo esc_html($post_data[$i]['title']); ?>
                                     </a>
                                 </h1>
 
                                 <div class="entry__info">
-                                    <a href="#0" class="entry__profile-pic">
+                                    <a href="<?php echo esc_url($post_data[$i]['author_url']); ?>" class="entry__profile-pic">
                                         <img class="avatar"
                                              src="<?php echo esc_url($post_data[$i]['author_avatar']); ?>"
                                              alt="">
