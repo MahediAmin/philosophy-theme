@@ -8,3 +8,13 @@ Version: 1.0.0
 Text Domain: philosophy
 
 */
+
+
+.badge-primary{
+    background: yellow;
+}
+
+.header__logo h1 a{
+    font-weight: 700;
+    color: #fff;
+}

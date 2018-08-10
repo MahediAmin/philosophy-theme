@@ -3,6 +3,7 @@
 // requeire file
 require_once(get_theme_file_path("inc/tgm.php"));
 require_once(get_theme_file_path("inc/cmb2function.php"));
+require_once(get_theme_file_path("inc/wdgt.php"));
 
 
 
@@ -30,16 +31,21 @@ function philosophy_bootstraping(){
 
     );
     add_theme_support("custom-header", $philosophy_custom_theader_detils);
-    $philosophy_custom_logo_css = array(
-        "width" => '100',
-        "height" =>  '100'
-    );
-    add_theme_support("custom-logo", $philosophy_custom_logo_css);
+//    $philosophy_custom_logo_css = array(
+//        "width" => '100',
+//        "height" =>  '100'
+//    );
+    add_theme_support("custom-logo");
     add_theme_support("custom-background");
     add_theme_support( 'html5', array( 'search-form','comment-list' ) );
 
     // menu
     register_nav_menu("top_menu", __("Top Menu","philosophy"));
+    register_nav_menus(array(
+        "footer-left"=>__("Footer Left Menu","philosophy"),
+        "footer-middle"=>__("Footer Middle Menu","philosophy"),
+        "footer-right"=>__("Footer Right Menu","philosophy"),
+    ));
 
 
     add_image_size("philosophy-squuareimage", 400, 400, true);
@@ -141,5 +147,81 @@ function philosophy_widgets(){
         'before_title'  => '<h3 class="quarter-top-margin">',
         'after_title'   => '</h3>',
     ) );
+
+    register_sidebar( array(
+        'name'          => __( 'Before Footer Section', 'philosophy' ),
+        'id'            => 'before-footer-right',
+        'description'   => __( 'before footer section, right side', 'philosophy' ),
+        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3>',
+        'after_title'   => '</h3>',
+    ) );
+    register_sidebar( array(
+        'name'          => __( 'Footer Section', 'philosophy' ),
+        'id'            => 'footer-right',
+        'description'   => __( 'footer section, right side', 'philosophy' ),
+        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4>',
+        'after_title'   => '</h4>',
+    ) );
+    register_sidebar( array(
+        'name'          => __( 'Footer Bottom Section', 'philosophy' ),
+        'id'            => 'footer-bottom',
+        'description'   => __( 'footer section, bottom side', 'philosophy' ),
+        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '',
+        'after_title'   => '',
+    ) );
+
+    register_sidebar( array(
+        'name'          => __( 'Header Section', 'philosophy' ),
+        'id'            => 'header-section',
+        'description'   => __( 'Widgets in this area will be shown on header section.', 'philosophy' ),
+        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3>',
+        'after_title'   => '</h3>',
+    ) );
+
+
+
+
+
 }
 add_action("widgets_init","philosophy_widgets");
+
+
+
+function philosophy_search_form( $form ) {
+    $homedir      = home_url( "/" );
+    $label        = __( "Search for:", "philosophy" );
+    $button_label = __( "Search", "philosophy" );
+    $newform      = <<<FORM
+<form role="search" method="get" class="header__search-form" action="{$homedir}">
+    <label>
+        <span class="hide-content">{$label}</span>
+        <input type="search" class="search-field" placeholder="Type Keywords" value="" name="s"
+               title="{$label}" autocomplete="off">
+    </label>
+    <input type="submit" class="search-submit" value="{$button_label}">
+</form>
+FORM;
+    return $newform;
+}
+add_filter( "get_search_form", "philosophy_search_form" );
+
+
+function philosophy_search_result($text)
+{
+    if (is_search()) {
+        $pattern = '/(' . join('|', explode(' ', get_search_query())) . ')/i';
+        $text = preg_replace($pattern, '<span class="badge badge-primary">\0</span>', $text);
+    }
+    return $text;
+}
+add_filter('the_content', 'philosophy_search_result');
+add_filter('the_excerpt', 'philosophy_search_result');
+add_filter('the_title', 'philosophy_search_result');
